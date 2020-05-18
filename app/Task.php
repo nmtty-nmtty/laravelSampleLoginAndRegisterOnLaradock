@@ -10,7 +10,7 @@ class Task extends Model
         'customer_id', 'comment', 'complete_flg'
     ];
 
-    public function findByCustomerId(String $customer_id)
+    public function findByCustomerId($customer_id)
     {
         $query = Task::where('customer_id', $customer_id);
         return $query->get();

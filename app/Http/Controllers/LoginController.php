@@ -24,11 +24,17 @@ class LoginController extends Controller
         if (!empty($email) && !empty($password)) {
 
             // TODO CreateRequestを使用すると、バリデーションチェックは働くがこのメソッドが実行されないためバリデーション未実装
-            $query = Customer::where('email', $email)->where('password', $password);
+            $query = Customer::where('email', $email);
             $model = $query->first();
 
             if ($model === null) {
                 $failerMessage = '対象ユーザーが存在しません';
+                return view('login.index', compact('failerMessage', 'email', 'password'));
+            }
+
+            // パスワードチェック
+            if (!password_verify($password, $model->password)) {
+                $failerMessage = 'パスワードが正しくありません';
                 return view('login.index', compact('failerMessage', 'email', 'password'));
             }
 

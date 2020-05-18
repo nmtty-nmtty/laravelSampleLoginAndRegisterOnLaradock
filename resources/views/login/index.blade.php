@@ -9,9 +9,7 @@
       <form action="{{ route('login.search') }}" method="POST" class="form" id="form1">
         @csrf
         <h1>LoginForm</h1>
-        @error('failerMessage')
-        <p style="font-weight:bold; color: orangered">ERROR : {{$message}}</p>
-        @enderror
+        <p style="font-weight:bold; color: orangered">ERROR : {{{isset($failerMessage) ? $failerMessage : ''}}}</p>
 
         <p class="email">
           @error('email')
