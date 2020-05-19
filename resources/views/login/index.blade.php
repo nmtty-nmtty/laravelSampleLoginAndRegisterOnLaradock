@@ -6,17 +6,26 @@
 <div class="container">
   <div id="form-main">
     <div id="form-div">
-      <form class="form" id="form1">
+      <form action="{{ route('login.search') }}" method="POST" class="form" id="form1">
+        @csrf
         <h1>LoginForm</h1>
+        <p style="font-weight:bold; color: orangered">ERROR : {{{isset($failerMessage) ? $failerMessage : ''}}}</p>
+
         <p class="email">
-          <input name="email" type="email" class="validate[required,custom[email]] feedback-input" id="email"
-            placeholder="email" />
+          @error('email')
+          <p style="font-weight:bold; color: orangered">ERROR : {{$message}}</p>
+          @enderror
+          <input name="email" type="email" class="validate[required,custom[email]] feedback-input"
+            value="{{old('email')}}" id="email" placeholder="email" />
         </p>
 
         <p class="password">
+          @error('password')
+          <p style="font-weight:bold; color: orangered">ERROR : {{$message}}</p>
+          @enderror
           <input name="password" type="password"
-            class="validate[required,custom[onlyLetterNumber],length[0,100]] feedback-input" placeholder="password"
-            id="password" />
+            class="validate[required,custom[onlyLetterNumber],length[0,100]] feedback-input" value="{{old('password')}}"
+            placeholder="password" id="password" />
         </p>
 
         <p class="remember">

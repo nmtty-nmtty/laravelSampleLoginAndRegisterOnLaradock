@@ -9,7 +9,7 @@ class CreateRequest extends FormRequest
 {
     public function authorize()
     {
-        if ($this->path() === 'create') {
+        if ($this->path() !== 'index') {
             return true;
         } else {
             return false;
