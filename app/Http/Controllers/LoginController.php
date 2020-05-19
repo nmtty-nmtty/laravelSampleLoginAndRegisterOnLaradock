@@ -27,7 +27,7 @@ class LoginController extends Controller
             $query = Customer::where('email', $email);
             $model = $query->first();
 
-            if ($model === null) {
+            if (!$model) {
                 $failerMessage = '対象ユーザーが存在しません';
                 return view('login.index', compact('failerMessage', 'email', 'password'));
             }
