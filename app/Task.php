@@ -15,10 +15,4 @@ class Task extends Model
         $query = Task::where('customer_id', $customer_id);
         return $query->get();
     }
-
-    public function findById($id)
-    {
-        $query = Task::where('id', $id);
-        return $query->get();
-    }
 }

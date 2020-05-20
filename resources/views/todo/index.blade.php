@@ -22,23 +22,15 @@
         @foreach ($models as $model)
         <?php $modelId = $model->id; ?>
         <tr>
-          　<form action="{{ route('todo.delete',['id' => $modelId]) }}" method="POST" class="form"
-            id="form_{{ $modelId }}">
+          　<form action="{{ route('todo.delete',['id' => $modelId]) }}" method="POST" class="form">
             @csrf
+            @method('DELETE')
             <td>{{{isset($modelId) ? $loop->index : ''}}}</td>
             <td>{{{isset($model->comment) ? $model->comment : ''}}}</td>
-            <td style="border: medium solid black;">{{$model->complete_flg ? '完了' : '作業中'}}
-            </td>
-            <td style="border: medium solid black;"><a href="#" data-id="{{ $modelId }}"
-                onclick="deletePost(this);">削除</a></td>
+            <td style="border: medium solid black;">{{$model->complete_flg ? '完了' : '作業中'}}</td>
+            <td style="border: medium solid black;"><button type=“submit”>削除</button></td>
           </form>
         </tr>
-
-        <script>
-          function deletePost(e) {
-            document.getElementById('form_' + e.dataset.id).submit();
-          }
-        </script>
 
         @endforeach
         @endif

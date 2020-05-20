@@ -34,14 +34,12 @@ class TodoController extends Controller
 
     public function delete($id)
     {
-        $loginedModel = session('loginedModel');
-        $task = new Task;
+        $task = Task::find($id);
 
         // タスクの主キーで削除
-        $task::destroy($id);
+        $task->delete();
 
-        // セッションに保存してあるデータを用いて、ログインユーザーに紐づくタスクデータのみを取得
-        $models = $task->findByCustomerId($loginedModel->id);
-        return view('todo.index', compact('models'));
+        // 直前の画面に遷移
+        return redirect()->back();
     }
 }
