@@ -42,4 +42,17 @@ class TodoController extends Controller
         // 直前の画面に遷移
         return redirect()->back();
     }
+
+    public function update($id)
+    {
+        $task = Task::find($id);
+
+        $complete_flg = $task->complete_flg;
+
+        // complete_flgを反転させて更新
+        $task->update(['complete_flg' => !$complete_flg]);
+
+        // 直前の画面に遷移
+        return redirect()->back();
+    }
 }
