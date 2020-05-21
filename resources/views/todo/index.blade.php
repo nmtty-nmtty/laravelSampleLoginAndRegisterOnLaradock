@@ -20,13 +20,18 @@
 
         @if (isset($models))
         @foreach ($models as $model)
+        <?php $modelId = $model->id; ?>
         <tr>
-          <td>{{{isset($model->id) ? $model->id : ''}}}</td>
-          <td>{{{isset($model->comment) ? $model->comment : ''}}}</td>
-          <td style="border: medium solid black;">{{$model->complete_flg ? '完了' : '作業中'}}
-          </td>
-          <td style="border: medium solid black;"><a href="{{ route('todo.delete') }}">削除</a></td>
+          　<form action="{{ route('todo.delete',['id' => $modelId]) }}" method="POST" class="form">
+            @csrf
+            @method('DELETE')
+            <td>{{{isset($modelId) ? $loop->index : ''}}}</td>
+            <td>{{{isset($model->comment) ? $model->comment : ''}}}</td>
+            <td style="border: medium solid black;">{{$model->complete_flg ? '完了' : '作業中'}}</td>
+            <td style="border: medium solid black;"><button type=“submit”>削除</button></td>
+          </form>
         </tr>
+
         @endforeach
         @endif
       </table>

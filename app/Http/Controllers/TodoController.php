@@ -31,4 +31,15 @@ class TodoController extends Controller
         $models = $task->findByCustomerId($loginedUserId);
         return view('todo.index', compact('models'));
     }
+
+    public function delete($id)
+    {
+        $task = Task::find($id);
+
+        // タスクの主キーで削除
+        $task->delete();
+
+        // 直前の画面に遷移
+        return redirect()->back();
+    }
 }
