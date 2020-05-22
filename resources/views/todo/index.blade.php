@@ -22,8 +22,8 @@
         @foreach ($models as $model)
         <?php $modelId = $model->id; ?>
         <tr>
-          <td>{{{isset($modelId) ? $loop->index : ''}}}</td>
-          <td>{{{isset($model->comment) ? $model->comment : ''}}}</td>
+          <td>{{$loop->index}}</td>
+          <td>{{$model->comment}}</td>
 
           　<form action="{{ route('todo.update',['id' => $modelId]) }}" method="POST" class="form">
             @csrf
